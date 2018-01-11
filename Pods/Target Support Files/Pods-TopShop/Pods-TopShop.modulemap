@@ -1,0 +1,6 @@
+framework module Pods_TopShop {
+  umbrella header "Pods-TopShop-umbrella.h"
+
+  export *
+  module * { export * }
+}
