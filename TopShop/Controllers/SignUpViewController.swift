@@ -20,6 +20,8 @@ class SignUpViewController: TextInputViewController {
     
     let manager = AccountManager.shared
 
+    @IBOutlet weak var navigationBarImageView: UIImageView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -73,7 +75,6 @@ class SignUpViewController: TextInputViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.scrollView = contentScrollView
-        
         prepareUI()
     }
     
