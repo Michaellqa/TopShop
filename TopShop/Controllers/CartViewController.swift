@@ -21,6 +21,7 @@ class CartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Cart"
 
         for item in productList {
             print("\(item.count) of \(item.product.name)")

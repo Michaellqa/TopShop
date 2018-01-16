@@ -30,6 +30,7 @@ class CatalogViewController: UIViewController {
     private let queryService = QueryService()
     
     // UIWidgets
+    @IBOutlet weak var cartBarItem: UIBarButtonItem! // useless right now
     @IBOutlet weak var profileBarItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     lazy var refreshControl: UIRefreshControl = {
@@ -72,8 +73,9 @@ class CatalogViewController: UIViewController {
     
     // Mark: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GoToCheckout" {
-            print("Preparation is stubbing")
+        if segue.identifier == "GoToCart" {
+            // if any items were selected...
+            print("Let's buy those \(productsInCart.count) products")
         }
     }
 }
@@ -121,8 +123,12 @@ extension CatalogViewController: SwipeTableViewCellDelegate {
             self.productsInCart.append(joke)
             
             // TODO: Alert controller
+            let alert = UIAlertController(title: "Item added to the cart", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
         anotherAction.backgroundColor = #colorLiteral(red: 1, green: 0.6632423401, blue: 0, alpha: 1)
+        
         return [anotherAction]
     }
     
