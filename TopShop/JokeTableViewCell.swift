@@ -7,18 +7,17 @@
 //
 
 import UIKit
-import SwipeCellKit
 
-class JokeTableViewCell: SwipeTableViewCell {
+class JokeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
 
-    var joke: Joke? {
+    var product: Product? {
         didSet {
-            guard let joke = joke else { return }
-            idLabel.text = "#\(joke.id ?? 0)"
-            contentLabel.text = joke.content
+            guard let product = product else { return }
+            idLabel.text = "#\(product.id ?? 0)"
+            contentLabel.text = product.title
         }
     }
 

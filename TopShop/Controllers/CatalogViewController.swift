@@ -10,19 +10,15 @@
 
 
 import UIKit
-import SwipeCellKit
 
 class CatalogViewController: UIViewController {
-    
-    var jokes = [Joke(id: 1, content: "lul"),
-                 Joke(id: 2, content: "another joke with very very very very deep mining"),
-                 Joke(id: 54321, content: "Rofl")]
-    fileprivate var productsInCart = [Joke]() {
+    var products: [Product] = []
+    fileprivate var productsInCart = [Product]() {
         didSet {
             if productsInCart.count > 0 {
-                print("There are \(productsInCart.count) products in cart")
+                activateCartButton()
             } else {
-                print("The cart is empty")
+                cartBarItem.isEnabled = false
             }
         }
     }
@@ -30,7 +26,17 @@ class CatalogViewController: UIViewController {
     private let queryService = QueryService()
     
     // UIWidgets
-    @IBOutlet weak var cartBarItem: UIBarButtonItem! // useless right now
+    @IBOutlet weak var cartBarItem: UIBarButtonItem! {
+        didSet {
+            let icon = UIImage(named: "cart-v3")?.withRenderingMode(.alwaysTemplate)
+            let iconSize = CGRect(origin: CGPoint.zero, size: icon!.size)
+            let iconButton = UIButton(frame: iconSize)
+            iconButton.tintColor = .white
+            iconButton.setBackgroundImage(icon, for: .normal)
+            cartBarItem.customView = iconButton
+            cartBarItem.isEnabled = false
+        }
+    }
     @IBOutlet weak var profileBarItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     lazy var refreshControl: UIRefreshControl = {
@@ -41,6 +47,19 @@ class CatalogViewController: UIViewController {
         refreshControl.tintColor = #colorLiteral(red: 1, green: 0.6632423401, blue: 0, alpha: 1)
         return refreshControl
     }()
+    
+    private func activateCartButton() {
+        cartBarItem.isEnabled = true
+        cartBarItem.customView!.transform = CGAffineTransform(scaleX: 0, y: 0)
+        UIView.animate(withDuration: 0.8,
+                       delay: 0,
+                       usingSpringWithDamping: 0.7,
+                       initialSpringVelocity: 10,
+                       options: .curveLinear,
+                       animations: {
+                        self.cartBarItem.customView!.transform = CGAffineTransform.identity
+        })
+    }
     
     @IBAction func resignUser(_ sender: UIBarButtonItem) {
         AccountManager.shared.resign()
@@ -54,7 +73,7 @@ class CatalogViewController: UIViewController {
         tableView.addSubview(refreshControl)
 //        tableView.register(JokeTableViewCell.self, forCellReuseIdentifier: CellId) // UNEXPECTED Override registration
         
-        updateTableResults() // QueryService test
+        updateTableResults()
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
@@ -63,19 +82,10 @@ class CatalogViewController: UIViewController {
     }
     
     func updateTableResults() {
-        queryService.fetch { jokes in
+        queryService.fetch { products in
             self.refreshControl.endRefreshing()
-            // TODO: should perform after ending
-            self.jokes = jokes
+            self.products = products
             self.tableView.reloadData()
-        }
-    }
-    
-    // Mark: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "GoToCart" {
-            // if any items were selected...
-            print("Let's buy those \(productsInCart.count) products")
         }
     }
 }
@@ -83,13 +93,12 @@ class CatalogViewController: UIViewController {
 // Mark: - TableViewDataSource
 extension CatalogViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return jokes.count
+        return products.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellId) as! JokeTableViewCell
-        cell.joke = jokes[indexPath.row]
-        cell.delegate = self
+        cell.product = products[indexPath.row]
         return cell
     }
 }
@@ -97,48 +106,26 @@ extension CatalogViewController: UITableViewDataSource {
 // Mark: - TableViewDelegate
 extension CatalogViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        do something...
-//        let selectedJoke = jokes[indexPath.row]
-//        ...
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        return UISwipeActionsConfiguration()
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let addAction = UIContextualAction(style: .normal, title: "Add to cart") { [weak self] (_, _, _) in
+            guard let strongSelf = self else {
+                print("Error! Item cannot be added")
+                return
+            }
+            let product = strongSelf.products[indexPath.row]
+            strongSelf.productsInCart.append(product)
+            
+        }
+        addAction.backgroundColor = #colorLiteral(red: 1, green: 0.6632423401, blue: 0, alpha: 1)
+        let swipeActions = UISwipeActionsConfiguration(actions: [addAction])
+        swipeActions.performsFirstActionWithFullSwipe = false
+        return swipeActions
     }
 }
 
-// Mark: - SwipeCellDelegate
-extension CatalogViewController: SwipeTableViewCellDelegate {
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .right else { return nil }
-        
-//        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { (action, indexPath) in
-//            // handle action by updating model whis deletion
-//            self.jokes.remove(at: indexPath.row)
-//        }
-        let anotherAction = SwipeAction(style: .default, title: "Add to cart") { (action, indexPath) in
-            let joke = self.jokes[indexPath.row]
-            self.productsInCart.append(joke)
-            
-            // TODO: Alert controller
-            let alert = UIAlertController(title: "Item added to the cart", message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-        anotherAction.backgroundColor = #colorLiteral(red: 1, green: 0.6632423401, blue: 0, alpha: 1)
-        
-        return [anotherAction]
-    }
-    
-    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
-        var options = SwipeTableOptions()
-        options.transitionStyle = .drag
-//        options.expansionStyle = .destructive // auto-deletion
-        return options
-    }
-}
 
 
 

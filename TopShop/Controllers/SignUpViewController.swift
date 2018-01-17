@@ -4,17 +4,9 @@
 //
 //  Created by Micky on 06/12/2017.
 //  Copyright © 2017 Micky. All rights reserved.
-// https://www.raywenderlich.com/159481/uiscrollview-tutorial-getting-started
 //
 
 import UIKit
-
-enum Trouble { // rename
-    case emptyField
-    case badLogin
-    case takenLogin
-    case weakPassword
-}
 
 class SignUpViewController: TextInputViewController {
     
@@ -76,10 +68,16 @@ class SignUpViewController: TextInputViewController {
         super.viewDidLoad()
         self.scrollView = contentScrollView
         prepareUI()
+        
     }
     
     func prepareUI() {
         continueButton?.layer.cornerRadius = continueButton.frame.height / 2
+    }
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+        //return UIStatusBarStyle.default   // Make dark again
     }
 
     // MARK: - Navigation

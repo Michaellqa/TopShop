@@ -9,9 +9,8 @@
 /* Begin PBXBuildFile section */
 		814010891FE6A11E007695E8 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814010881FE6A11E007695E8 /* TextInputViewController.swift */; };
 		814010931FE80307007695E8 /* JokeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814010921FE80307007695E8 /* JokeTableViewCell.swift */; };
-		814010BD1FE86AC6007695E8 /* Joke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814010BC1FE86AC6007695E8 /* Joke.swift */; };
 		814010C11FE907CF007695E8 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814010C01FE907CF007695E8 /* QueryService.swift */; };
-		81760A0D1FDD774900A3BF66 /* ProductStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81760A0C1FDD774900A3BF66 /* ProductStore.swift */; };
+		8162F4CC200F8E6A006E3387 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162F4CB200F8E6A006E3387 /* Product.swift */; };
 		81760A0F1FDEC72700A3BF66 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81760A0E1FDEC72700A3BF66 /* CartViewController.swift */; };
 		819758931FD6ACE100D802F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819758921FD6ACE100D802F2 /* AppDelegate.swift */; };
 		819758951FD6ACE100D802F2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819758941FD6ACE100D802F2 /* LoginViewController.swift */; };
@@ -31,9 +30,8 @@
 		786B67075E62253E0123DB8E /* Pods-TopShop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TopShop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TopShop/Pods-TopShop.debug.xcconfig"; sourceTree = "<group>"; };
 		814010881FE6A11E007695E8 /* TextInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
 		814010921FE80307007695E8 /* JokeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeTableViewCell.swift; sourceTree = "<group>"; };
-		814010BC1FE86AC6007695E8 /* Joke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joke.swift; sourceTree = "<group>"; };
 		814010C01FE907CF007695E8 /* QueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
-		81760A0C1FDD774900A3BF66 /* ProductStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStore.swift; sourceTree = "<group>"; };
+		8162F4CB200F8E6A006E3387 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		81760A0E1FDEC72700A3BF66 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		8197588F1FD6ACE100D802F2 /* TopShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		819758921FD6ACE100D802F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 				819758AB1FD80EF500D802F2 /* Controllers */,
 				811E52C51FEA44E40062517C /* Extensions */,
 				8197589E1FD6ACE100D802F2 /* Info.plist */,
-				814010BC1FE86AC6007695E8 /* Joke.swift */,
 			);
 			path = TopShop;
 			sourceTree = "<group>";
@@ -135,8 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				819758AF1FD93DDA00D802F2 /* AccountManager.swift */,
-				81760A0C1FDD774900A3BF66 /* ProductStore.swift */,
 				814010C01FE907CF007695E8 /* QueryService.swift */,
+				8162F4CB200F8E6A006E3387 /* Product.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -279,18 +276,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				814010BD1FE86AC6007695E8 /* Joke.swift in Sources */,
 				819758A61FD70D5000D802F2 /* CatalogViewController.swift in Sources */,
 				819758951FD6ACE100D802F2 /* LoginViewController.swift in Sources */,
 				819758A91FD8078B00D802F2 /* SignUpViewController.swift in Sources */,
 				814010C11FE907CF007695E8 /* QueryService.swift in Sources */,
 				819758D41FD99C5E00D802F2 /* topShop.xcdatamodeld in Sources */,
+				8162F4CC200F8E6A006E3387 /* Product.swift in Sources */,
 				814010891FE6A11E007695E8 /* TextInputViewController.swift in Sources */,
 				81760A0F1FDEC72700A3BF66 /* CartViewController.swift in Sources */,
 				814010931FE80307007695E8 /* JokeTableViewCell.swift in Sources */,
 				819758931FD6ACE100D802F2 /* AppDelegate.swift in Sources */,
 				819758B01FD93DDA00D802F2 /* AccountManager.swift in Sources */,
-				81760A0D1FDD774900A3BF66 /* ProductStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,12 +6,6 @@
 //  Copyright © 2017 Micky. All rights reserved.
 //
 
-// Switch StatusBar schema
-//override var preferredStatusBarStyle : UIStatusBarStyle {
-//    return UIStatusBarStyle.lightContent
-//    //return UIStatusBarStyle.default   // Make dark again
-//}
-
 import UIKit
 
 class LoginViewController: TextInputViewController {

@@ -11,9 +11,10 @@ import Foundation
 
 class QueryService {
     
-    var jokes: [Joke] = []
+    var products: [Product] = []
+    let destinationURLString = "https://my-json-server.typicode.com/llodi/edustore/products"
     
-    func fetch(completion: @escaping ([Joke]) -> ()) {
+    func fetch(completion: @escaping ([Product]) -> ()) {
         let session = URLSession(configuration: .default)
         guard let url = constructURL() else {
             return
@@ -32,41 +33,40 @@ class QueryService {
             }
             self.updateResults(data)
             DispatchQueue.main.async {
-                completion(self.jokes)
+                completion(self.products)
             }
         }
         dataTask.resume()
     }
     
     func updateResults(_ data: Data) {
-        var response: [String:Any]
-        jokes.removeAll()
+        var response: [Any]
+        products.removeAll()
         
         do {
-            response = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
+            response = try JSONSerialization.jsonObject(with: data, options: []) as! [Any]
         } catch let parseError {
             print("JSONSerialization error \(parseError)")
             return
         }
-        guard let array = response["value"] as? [Any] else {
-            print("JSON does not contain value key")
-            return
-        }
         
-        for jokeItem in array {
-            if let jokeItem = jokeItem as? [String:Any],
-                let jokeID = jokeItem["id"] as? Int,
-                let jokeContent = jokeItem["joke"] as? String {
+        for productItem in response {
+            if let productItem = productItem as? [String:Any] {
+                let product = Product()
+                product.id = productItem["id"] as? Int
+                product.title = productItem["title"] as? String
+                product.description = productItem["description"] as? String
+                product.imageUrl = productItem["url"] as? String
+                product.price = productItem["price"] as? Int
                 
-                self.jokes.append(Joke(id: jokeID, content: jokeContent))
+                self.products.append(product)
             }
         }
         
     }
     
     func constructURL() -> URL? {
-        let numberOfJokes = 10
-        let urlString = "https://api.icndb.com/jokes/random/\(numberOfJokes)"
+        let urlString = destinationURLString
         guard let url = URL(string: urlString) else {
             return nil
         }

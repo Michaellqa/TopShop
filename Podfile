@@ -5,6 +5,6 @@ target 'TopShop' do
   use_frameworks!
 
 # Latest release in CocoaPods
-pod 'SwipeCellKit'
+
 
 end

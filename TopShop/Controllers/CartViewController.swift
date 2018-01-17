@@ -23,9 +23,9 @@ class CartViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "Cart"
 
-        for item in productList {
-            print("\(item.count) of \(item.product.name)")
-        }
+//        for item in productList {
+//            print("\(item.count) of \(item.product.name)")
+//        }
     }
     
     
