@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -172,40 +171,13 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="724"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductCell" rowHeight="100" id="Dht-vx-50x" customClass="JokeTableViewCell" customModule="TopShop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="productTVCell" id="vOB-kV-WCU" customClass="ProductTableViewCell" customModule="TopShop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dht-vx-50x" id="6JT-9O-M9P">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.666666666666671"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vOB-kV-WCU" id="ozh-NL-ZMc">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5se-J3-hpN">
-                                                    <rect key="frame" x="15" y="11" width="345" height="29"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4o-8R-HHU">
-                                                    <rect key="frame" x="15" y="50" width="345" height="39"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="5se-J3-hpN" firstAttribute="top" secondItem="6JT-9O-M9P" secondAttribute="topMargin" id="6bd-1B-YH9"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="b4o-8R-HHU" secondAttribute="trailing" id="LLK-b8-fhP"/>
-                                                <constraint firstItem="b4o-8R-HHU" firstAttribute="top" secondItem="5se-J3-hpN" secondAttribute="bottom" constant="10" id="Lzh-k9-lsK"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="b4o-8R-HHU" secondAttribute="bottom" id="bXV-S7-IsM"/>
-                                                <constraint firstItem="5se-J3-hpN" firstAttribute="leading" secondItem="6JT-9O-M9P" secondAttribute="leadingMargin" id="cb0-l3-n2X"/>
-                                                <constraint firstItem="b4o-8R-HHU" firstAttribute="leading" secondItem="6JT-9O-M9P" secondAttribute="leadingMargin" id="nhO-lZ-VFr"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="5se-J3-hpN" secondAttribute="trailing" id="t1b-OV-Hfh"/>
-                                            </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="contentLabel" destination="b4o-8R-HHU" id="qm2-Pd-sI0"/>
-                                            <outlet property="idLabel" destination="5se-J3-hpN" id="Nt2-fZ-O5B"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -229,7 +201,7 @@
                                 <action selector="resignUser:" destination="2WI-9m-ILN" id="qcY-So-kzs"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Cart" image="cart-v3" id="Eq8-Bj-4kH"/>
+                        <barButtonItem key="rightBarButtonItem" title="Cart" id="Eq8-Bj-4kH"/>
                     </navigationItem>
                     <connections>
                         <outlet property="cartBarItem" destination="Eq8-Bj-4kH" id="gsm-Y3-gpQ"/>
@@ -428,7 +400,6 @@
     </scenes>
     <resources>
         <image name="Logo" width="510" height="510"/>
-        <image name="cart-v3" width="25" height="25"/>
         <image name="eyeShowPass" width="128" height="128"/>
     </resources>
 </document>

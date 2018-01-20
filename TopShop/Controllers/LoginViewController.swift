@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: TextInputViewController {
+class LoginViewController: UIScrollViewController {
     
     private let accountManager = AccountManager.shared
     

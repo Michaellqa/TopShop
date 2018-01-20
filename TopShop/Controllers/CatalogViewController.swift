@@ -12,7 +12,11 @@
 import UIKit
 
 class CatalogViewController: UIViewController {
-    var products: [Product] = []
+    var products: [Product] = [] {
+        didSet {
+            print("\(products.count) items recieved")
+        }
+    }
     fileprivate var productsInCart = [Product]() {
         didSet {
             if productsInCart.count > 0 {
@@ -22,7 +26,7 @@ class CatalogViewController: UIViewController {
             }
         }
     }
-    private let CellId = "ProductCell"
+    private let CellId = "productTVCell"
     private let queryService = QueryService()
     
     // UIWidgets
@@ -71,8 +75,9 @@ class CatalogViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.addSubview(refreshControl)
-//        tableView.register(JokeTableViewCell.self, forCellReuseIdentifier: CellId) // UNEXPECTED Override registration
-        
+        tableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: "productTVCell")
+        // test
+//        products = [Product(id: 35, title: "Very VeryVery VeryVeryVery VeryVery", description: "description VeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVery", imageUrl: "img", price: 3373555)]
         updateTableResults()
     }
     
@@ -82,7 +87,7 @@ class CatalogViewController: UIViewController {
     }
     
     func updateTableResults() {
-        queryService.fetch { products in
+        queryService.alamoAutoFetch { products in
             self.refreshControl.endRefreshing()
             self.products = products
             self.tableView.reloadData()
@@ -97,7 +102,7 @@ extension CatalogViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellId) as! JokeTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellId) as! ProductTableViewCell
         cell.product = products[indexPath.row]
         return cell
     }

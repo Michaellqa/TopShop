@@ -7,23 +7,32 @@
 //
 
 import Foundation
+import HandyJSON
 
-class Product {
+class Product: HandyJSON, Codable {
     var id: Int?
     var title: String?
     var description: String?
-    var imageUrl: String?
+    var url: String?
     var price: Int?
     
-    init() {
-        
-    }
+//    private enum CodingKeys: String, CodingKey {
+//        case imageURL = "url"
+//        case title
+//        case description
+//        case id
+//        case price
+//    }
+    
+    required init() { }
     
     init(id: Int, title: String, description: String, imageUrl: String, price: Int) {
         self.id = id
         self.title = title
         self.description = description
-        self.imageUrl = imageUrl
+        self.url = imageUrl
         self.price = price
     }
 }
+
+

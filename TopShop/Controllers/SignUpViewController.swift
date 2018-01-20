@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: TextInputViewController {
+class SignUpViewController: UIScrollViewController {
     
     let manager = AccountManager.shared
 

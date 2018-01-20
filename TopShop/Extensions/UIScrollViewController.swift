@@ -8,13 +8,11 @@
 
 import UIKit
 
-class TextInputViewController: UIViewController {
+class UIScrollViewController: UIViewController {
     
-    // a better solution i'd like to know
     var scrollView: UIScrollView?
     private var keyboardIsHidden = true
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         addKeyboardObservers()
@@ -23,12 +21,12 @@ class TextInputViewController: UIViewController {
     func addKeyboardObservers() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TextInputViewController.keyboardWillShow(_:)),
+            selector: #selector(UIScrollViewController.keyboardWillShow(_:)),
             name: Notification.Name.UIKeyboardWillShow,
             object: nil)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(TextInputViewController.keyboardWillHide(_:)),
+            selector: #selector(UIScrollViewController.keyboardWillHide(_:)),
             name: Notification.Name.UIKeyboardWillHide,
             object: nil)
     }
@@ -39,8 +37,6 @@ class TextInputViewController: UIViewController {
         let adjustmentHeight = (keyboardFrame.height + 10) * (show ? 1 : -1)
         scrollView?.contentInset.bottom += adjustmentHeight
         scrollView?.scrollIndicatorInsets.bottom += adjustmentHeight
-        print(scrollView!.contentInset.bottom)
-        print(scrollView!.scrollIndicatorInsets.bottom)
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
