@@ -14,6 +14,10 @@ class QueryService {
     private var products: [Product] = []
     private let destinationURLString = "https://api.myjson.com/bins/jfqq5"
     
+    private struct ErrorMessage {
+        static let cannotDecodeJson = "JSON cannot be decoded"
+    }
+    
     func alamoHandyFetch(completion: @escaping ([Product]) -> ()) {
         Alamofire.request(destinationURLString).responseData { response in
             if let data = response.value,
@@ -26,7 +30,7 @@ class QueryService {
                 })
                 completion(self.products)
             } else {
-                print("JSON cannot be decoded")
+                print(ErrorMessage.cannotDecodeJson)
                 completion([])
             }
         }
@@ -38,7 +42,7 @@ class QueryService {
                 let fetchedProducts = try? JSONDecoder().decode([Product].self, from: jsonData) {
                 completion(fetchedProducts)
             } else {
-                print("JSON cannot be decoded")
+                print(ErrorMessage.cannotDecodeJson)
                 completion([])
             }
         }
@@ -48,7 +52,6 @@ class QueryService {
         products.removeAll()
         
         Alamofire.request(destinationURLString).responseJSON { response in
-            
             if let json = response.result.value as? [Any] {
                 for productItem in json {
                     if let productItem = productItem as? [String:Any] {
@@ -93,8 +96,8 @@ class QueryService {
     }
     
     private func updateResults(_ data: Data) {
-        var response: [Any]
         products.removeAll()
+        var response: [Any]
         
         do {
             response = try JSONSerialization.jsonObject(with: data, options: []) as! [Any] //!

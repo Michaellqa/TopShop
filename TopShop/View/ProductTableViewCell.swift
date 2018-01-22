@@ -10,6 +10,8 @@ import UIKit
 import Kingfisher
 
 class ProductTableViewCell: UITableViewCell {
+    
+    static let nibName = "ProductTableViewCell"
 
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -26,8 +28,7 @@ class ProductTableViewCell: UITableViewCell {
             priceLabel?.text = product.price != nil ? "\(product.price!)p" : "" //!
             
             if let urlString = product.url,
-                let imageUrl = URL(string: urlString)
-            {
+                let imageUrl = URL(string: urlString) {
                 thumbnailImageView.kf.setImage(with: imageUrl, placeholder: UIImage(named: "no-image-available"))
             }
         }

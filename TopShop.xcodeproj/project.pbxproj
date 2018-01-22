@@ -7,21 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8136B9CA2014D13A003894DB /* ShoppingCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8136B9C92014D13A003894DB /* ShoppingCart.swift */; };
+		8136B9CE20162DC5003894DB /* CartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8136B9CD20162DC5003894DB /* CartCollectionViewCell.swift */; };
+		813D0D62201484F500A10AE1 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813D0D61201484F500A10AE1 /* extensions.swift */; };
+		813D0D64201490F600A10AE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 813D0D63201490F600A10AE1 /* Assets.xcassets */; };
 		814010891FE6A11E007695E8 /* UIScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814010881FE6A11E007695E8 /* UIScrollViewController.swift */; };
-		814010931FE80307007695E8 /* JokeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814010921FE80307007695E8 /* JokeTableViewCell.swift */; };
 		814010C11FE907CF007695E8 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814010C01FE907CF007695E8 /* QueryService.swift */; };
 		8149CFB0201086F2005DF6C9 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8149CFAE201086F2005DF6C9 /* ProductTableViewCell.swift */; };
 		8149CFB1201086F2005DF6C9 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8149CFAF201086F2005DF6C9 /* ProductTableViewCell.xib */; };
+		814DE1A92013369B00C8015A /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814DE1A82013369B00C8015A /* Auth.swift */; };
 		8162F4CC200F8E6A006E3387 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162F4CB200F8E6A006E3387 /* Product.swift */; };
 		81760A0F1FDEC72700A3BF66 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81760A0E1FDEC72700A3BF66 /* CartViewController.swift */; };
 		819758931FD6ACE100D802F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819758921FD6ACE100D802F2 /* AppDelegate.swift */; };
 		819758951FD6ACE100D802F2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819758941FD6ACE100D802F2 /* LoginViewController.swift */; };
 		819758981FD6ACE100D802F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 819758961FD6ACE100D802F2 /* Main.storyboard */; };
-		8197589A1FD6ACE100D802F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 819758991FD6ACE100D802F2 /* Assets.xcassets */; };
 		8197589D1FD6ACE100D802F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8197589B1FD6ACE100D802F2 /* LaunchScreen.storyboard */; };
 		819758A61FD70D5000D802F2 /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819758A51FD70D5000D802F2 /* CatalogViewController.swift */; };
 		819758A91FD8078B00D802F2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819758A71FD8078B00D802F2 /* SignUpViewController.swift */; };
-		819758B01FD93DDA00D802F2 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819758AF1FD93DDA00D802F2 /* AccountManager.swift */; };
 		819758D41FD99C5E00D802F2 /* topShop.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 819758D21FD99C5E00D802F2 /* topShop.xcdatamodeld */; };
 		FCB2435D17440017E6A2D647 /* Pods_TopShop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8ED90229346603E50B09BA /* Pods_TopShop.framework */; };
 /* End PBXBuildFile section */
@@ -30,23 +32,25 @@
 		1FD57B2DE786078032E1C2BC /* Pods-TopShop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TopShop.release.xcconfig"; path = "Pods/Target Support Files/Pods-TopShop/Pods-TopShop.release.xcconfig"; sourceTree = "<group>"; };
 		5E8ED90229346603E50B09BA /* Pods_TopShop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TopShop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		786B67075E62253E0123DB8E /* Pods-TopShop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TopShop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TopShop/Pods-TopShop.debug.xcconfig"; sourceTree = "<group>"; };
+		8136B9C92014D13A003894DB /* ShoppingCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCart.swift; sourceTree = "<group>"; };
+		8136B9CD20162DC5003894DB /* CartCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCollectionViewCell.swift; sourceTree = "<group>"; };
+		813D0D61201484F500A10AE1 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		813D0D63201490F600A10AE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		814010881FE6A11E007695E8 /* UIScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewController.swift; sourceTree = "<group>"; };
-		814010921FE80307007695E8 /* JokeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeTableViewCell.swift; sourceTree = "<group>"; };
 		814010C01FE907CF007695E8 /* QueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
 		8149CFAE201086F2005DF6C9 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		8149CFAF201086F2005DF6C9 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
+		814DE1A82013369B00C8015A /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		8162F4CB200F8E6A006E3387 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		81760A0E1FDEC72700A3BF66 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		8197588F1FD6ACE100D802F2 /* TopShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		819758921FD6ACE100D802F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		819758941FD6ACE100D802F2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		819758971FD6ACE100D802F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		819758991FD6ACE100D802F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8197589C1FD6ACE100D802F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8197589E1FD6ACE100D802F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		819758A51FD70D5000D802F2 /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		819758A71FD8078B00D802F2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		819758AF1FD93DDA00D802F2 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		819758D31FD99C5E00D802F2 /* topShop.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = topShop.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,8 +78,28 @@
 			isa = PBXGroup;
 			children = (
 				814010881FE6A11E007695E8 /* UIScrollViewController.swift */,
+				813D0D61201484F500A10AE1 /* extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8136B9CB20161A8A003894DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8149CFAF201086F2005DF6C9 /* ProductTableViewCell.xib */,
+				8149CFAE201086F2005DF6C9 /* ProductTableViewCell.swift */,
+				8136B9CD20162DC5003894DB /* CartCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8136B9CC20161AB1003894DB /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				819758961FD6ACE100D802F2 /* Main.storyboard */,
+				8197589B1FD6ACE100D802F2 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		819758861FD6ACE100D802F2 = {
@@ -100,15 +124,13 @@
 		819758911FD6ACE100D802F2 /* TopShop */ = {
 			isa = PBXGroup;
 			children = (
-				814010921FE80307007695E8 /* JokeTableViewCell.swift */,
-				819758961FD6ACE100D802F2 /* Main.storyboard */,
 				819758AC1FD80F1000D802F2 /* Model */,
-				819758A41FD6C51900D802F2 /* SupportingFiles */,
+				8136B9CB20161A8A003894DB /* View */,
 				819758AB1FD80EF500D802F2 /* Controllers */,
+				8136B9CC20161AB1003894DB /* Storyboards */,
+				819758A41FD6C51900D802F2 /* SupportingFiles */,
 				811E52C51FEA44E40062517C /* Extensions */,
 				8197589E1FD6ACE100D802F2 /* Info.plist */,
-				8149CFAE201086F2005DF6C9 /* ProductTableViewCell.swift */,
-				8149CFAF201086F2005DF6C9 /* ProductTableViewCell.xib */,
 			);
 			path = TopShop;
 			sourceTree = "<group>";
@@ -117,8 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				819758921FD6ACE100D802F2 /* AppDelegate.swift */,
-				819758991FD6ACE100D802F2 /* Assets.xcassets */,
-				8197589B1FD6ACE100D802F2 /* LaunchScreen.storyboard */,
+				813D0D63201490F600A10AE1 /* Assets.xcassets */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -137,9 +158,10 @@
 		819758AC1FD80F1000D802F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				819758AF1FD93DDA00D802F2 /* AccountManager.swift */,
 				814010C01FE907CF007695E8 /* QueryService.swift */,
 				8162F4CB200F8E6A006E3387 /* Product.swift */,
+				814DE1A82013369B00C8015A /* Auth.swift */,
+				8136B9C92014D13A003894DB /* ShoppingCart.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -217,7 +239,7 @@
 			files = (
 				8197589D1FD6ACE100D802F2 /* LaunchScreen.storyboard in Resources */,
 				8149CFB1201086F2005DF6C9 /* ProductTableViewCell.xib in Resources */,
-				8197589A1FD6ACE100D802F2 /* Assets.xcassets in Resources */,
+				813D0D64201490F600A10AE1 /* Assets.xcassets in Resources */,
 				819758981FD6ACE100D802F2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				814DE1A92013369B00C8015A /* Auth.swift in Sources */,
 				819758A61FD70D5000D802F2 /* CatalogViewController.swift in Sources */,
 				819758951FD6ACE100D802F2 /* LoginViewController.swift in Sources */,
 				819758A91FD8078B00D802F2 /* SignUpViewController.swift in Sources */,
@@ -294,11 +317,12 @@
 				819758D41FD99C5E00D802F2 /* topShop.xcdatamodeld in Sources */,
 				8149CFB0201086F2005DF6C9 /* ProductTableViewCell.swift in Sources */,
 				8162F4CC200F8E6A006E3387 /* Product.swift in Sources */,
+				8136B9CE20162DC5003894DB /* CartCollectionViewCell.swift in Sources */,
 				814010891FE6A11E007695E8 /* UIScrollViewController.swift in Sources */,
 				81760A0F1FDEC72700A3BF66 /* CartViewController.swift in Sources */,
-				814010931FE80307007695E8 /* JokeTableViewCell.swift in Sources */,
+				8136B9CA2014D13A003894DB /* ShoppingCart.swift in Sources */,
 				819758931FD6ACE100D802F2 /* AppDelegate.swift in Sources */,
-				819758B01FD93DDA00D802F2 /* AccountManager.swift in Sources */,
+				813D0D62201484F500A10AE1 /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

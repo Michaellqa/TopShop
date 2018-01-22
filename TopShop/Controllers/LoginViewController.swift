@@ -10,49 +10,76 @@ import UIKit
 
 class LoginViewController: UIScrollViewController {
     
-    private let accountManager = AccountManager.shared
+    private let authManager = Auth.shared
+    
+    private struct InputErrorMessage {
+        static let emptyFields = "Empty fields"
+        static let incorrectEmail = "Email is not correct"
+        static let wrongPassword = "Wrong password"
+    }
+    
+    private struct SegueID {
+        static let showCatalog = "ShowCatalog"
+        static let showSignUp = "ShowSignUp"
+    }
+    
+    private struct ImageName {
+        static let showPassword = "eye"
+        static let hidePassword = "no-eye"
+    }
     
     @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var loginTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
+    @IBOutlet weak var showPasswordButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var contentScrollView: UIScrollView?
     
     @IBAction func touchShowPW(_ sender: UIButton) {
         passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
+        switchShowPassworButtonImage()
+    }
+    
+    func switchShowPassworButtonImage() {
+        let imageName = passwordTextField.isSecureTextEntry ? ImageName.showPassword : ImageName.hidePassword
+        let image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+        showPasswordButton.setImage(image, for: .normal)
     }
     
     @IBAction func hideKeyboard(_ sender: Any) {
-        loginTextField.endEditing(true)
+        emailTextField.endEditing(true)
         passwordTextField.endEditing(true)
     }
     
     private func authenticateUser() {
-        guard let login = loginTextField?.text, !login.isEmpty,
-            let password = passwordTextField?.text, !password.isEmpty else {
-                showErrorMessage("Empty fields")
-                return
+        guard
+            let email = emailTextField?.text, !email.isEmpty,
+            let password = passwordTextField?.text, !password.isEmpty
+        else {
+            showErrorMessage(InputErrorMessage.emptyFields)
+            return
         }
-        if let error = accountManager.logIn(withLogin: login, password: password) {
+        if let error = authManager.logIn(withEmail: email, andPass: password) {
             switch error {
             case .unregisteredEmail:
-                showErrorMessage("Wrong Email")
+                showErrorMessage(InputErrorMessage.incorrectEmail)
             case .wrongPassword:
-                showErrorMessage("Wrong Password")
+                showErrorMessage(InputErrorMessage.wrongPassword)
             }
-            errorMessageLabel.isHidden = false
+            passwordTextField.text = ""
         }
     }
     
     private func showErrorMessage(_ message: String) {
         errorMessageLabel.text = message
         errorMessageLabel.isHidden = false
+        passwordTextField.indicateWrongInput()
     }
     
     private func clearInputFields() {
-        loginTextField.text = ""
+        emailTextField.text = ""
         passwordTextField.text = ""
     }
     
@@ -61,43 +88,38 @@ class LoginViewController: UIScrollViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.scrollView = contentScrollView
-        
-        accountManager.conveniencePrintAllUsers()
-        // rounded corners for buttons
-        loginButton?.layer.cornerRadius = loginButton.frame.height / 2
-        signupButton?.layer.cornerRadius = signupButton.frame.height / 2
+        prepareUI()
+    }
+    
+    func prepareUI() {
+        loginButton?.rounded()
+        signupButton?.rounded()
+        switchShowPassworButtonImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         clearInputFields()
         errorMessageLabel.isHidden = true
+        quickIn() // test
+    }
+    
+    func quickIn() {
+        emailTextField.text = "g@v.no"
+        passwordTextField.text = "Qwert1"
     }
     
     // Mark: Navigation
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier! { // UNSAFE
-        case "ShowSignUp":
-            print("sign up segue")
-        case "ShowCatalog":
-            print("catalog segue")
-        default: break
-        }
-    }
-    
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
-        case "ShowCatalog":
+        case SegueID.showCatalog:
             authenticateUser()
-//            return accountManager.isUserAuthenticated()
-            print("User info NOT VERIFYING")
+            return authManager.isUserLoggedIn()
+        default:
             return true
-        default: return true
         }
     }
-    
-
 }
 
 

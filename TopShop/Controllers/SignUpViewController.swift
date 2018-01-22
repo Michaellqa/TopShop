@@ -10,7 +10,14 @@ import UIKit
 
 class SignUpViewController: UIScrollViewController {
     
-    let manager = AccountManager.shared
+    let authManager = Auth.shared
+    
+    private struct InputErrorMessage {
+        static let emptyFields = "Please fill in all the text fields"
+        static let incorrectEmail = "This email is incorrect"
+        static let emailIsTaken = "This email is already taken"
+        static let weakPassword = "This password is not very strong"
+    }
 
     @IBOutlet weak var navigationBarImageView: UIImageView!
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -41,18 +48,19 @@ class SignUpViewController: UIScrollViewController {
     }
     
     @IBAction func touchSave(_ sender: Any) {
-        guard let (name, login, password) = readDataFromFields() else {
-            showErrorMessage("Please fill in all the text fields")
+        guard let (name, email, password) = readDataFromFields() else {
+            showErrorMessage(InputErrorMessage.emptyFields)
             return
         }
-        if let error = manager.addUser(name: name, email: login, password: password) {
+        let user = AUser(name: name, email: email, password: password)
+        if let error = authManager.newUser(user) {
             switch error {
             case .incorrectEmail:
-                showErrorMessage("This email is incorrect")
+                showErrorMessage(InputErrorMessage.incorrectEmail)
             case .loginIsTaken:
-                showErrorMessage("This email has already taken")
+                showErrorMessage(InputErrorMessage.emailIsTaken)
             case .weakPassword:
-                showErrorMessage("This password is too weak")
+                showErrorMessage(InputErrorMessage.weakPassword)
             }
         } else {
             dismiss(animated: true)
@@ -68,20 +76,14 @@ class SignUpViewController: UIScrollViewController {
         super.viewDidLoad()
         self.scrollView = contentScrollView
         prepareUI()
-        
     }
     
     func prepareUI() {
-        continueButton?.layer.cornerRadius = continueButton.frame.height / 2
+        continueButton?.rounded()
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
-        //return UIStatusBarStyle.default   // Make dark again
     }
-
-    // MARK: - Navigation
-
-    // TODO: Continue button will autoindicate when your input data is valid
 
 }

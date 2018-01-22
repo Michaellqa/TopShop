@@ -10,24 +10,13 @@ import Foundation
 import CoreData
 import UIKit
 
-enum LoginError {
-    case unregisteredEmail
-    case wrongPassword
-}
 
-enum SignUpError {
-    case incorrectEmail
-    case loginIsTaken
-    case weakPassword
-}
 
 class AccountManager {
     // MARK: -Singleton
     private static var manager: AccountManager?
     static var shared: AccountManager {
-        if manager == nil {
-            manager = AccountManager()
-        }
+        if manager == nil { manager = AccountManager() }
         return manager!
     }
     
@@ -37,9 +26,9 @@ class AccountManager {
     }
     
     
-    private let entityName = "User"
     private let managedContext: NSManagedObjectContext
-    
+    private let entityName = "User"
+    // remove to release
     private var currentUser: NSManagedObject? {
         didSet {
             if currentUser == nil {
@@ -56,15 +45,9 @@ class AccountManager {
     }
     
     func addUser(name: String, email: String, password: String) -> SignUpError? {
-        guard !isUserExist(withLogin: email) else {
-            return SignUpError.loginIsTaken
-        }
-        guard isEmailCorrect(email) else {
-            return SignUpError.incorrectEmail
-        }
-        guard isPasswordStrong(password) else {
-            return SignUpError.weakPassword
-        }
+        guard !isUserExist(withLogin: email) else { return .loginIsTaken }
+        guard isEmailCorrect(email) else { return .incorrectEmail }
+        guard isPasswordStrong(password) else { return .weakPassword }
         
         let entity = NSEntityDescription.entity(forEntityName: entityName, in: managedContext)!
         let user = NSManagedObject(entity: entity, insertInto: managedContext)
@@ -99,7 +82,7 @@ class AccountManager {
         return nil
     }
     
-    func isUserExist(withLogin email: String) -> Bool {
+    private func isUserExist(withLogin email: String) -> Bool {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
         fetchRequest.predicate = NSPredicate(format: "email == %@", email)
         if let count = try? managedContext.fetch(fetchRequest).count, count > 0 {
@@ -140,5 +123,4 @@ class AccountManager {
     
     // TODO: invalidate session by time
 
-    // TODO: make authentication easier - get user/pass - return Error?
 }

@@ -8,28 +8,53 @@
 
 import UIKit
 
-typealias CartItem = (product: Product, count: Int)
-
-class CartViewController: UIViewController {
+class CartViewController: UICollectionViewController {
     
-    var productList = [CartItem]()
+    private let cart = ShoppingCart.shared
+    private let navigationTitle = "Cart"
+    private let cellReuseID = "CartCell"
 
-    @IBAction func emptyCartButton(_ sender: UIButton) {
-        print("Don't do anything")
-        navigationController?.popViewController(animated: true)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Cart"
-
-//        for item in productList {
-//            print("\(item.count) of \(item.product.name)")
-//        }
+        title = navigationTitle
+        collectionView?.backgroundColor = .white
+        collectionView?.register(CartCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseID)
+//        collectionView.regi
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseID, for: indexPath) as! CartCollectionViewCell
+        return cell
     }
     
     
     
-    // TODO: - Go out if cart has become empty (annoying UX)
-
 }
+
+extension CartViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.bounds.width, height: 100)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

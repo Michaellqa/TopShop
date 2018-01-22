@@ -6,28 +6,21 @@
 //  Copyright © 2017 Micky. All rights reserved.
 //
 
-//    var products = [Product(name: "TV"), Product(name: "Laptop"), Product(name: "Table")]
-
-
 import UIKit
 
 class CatalogViewController: UIViewController {
-    var products: [Product] = [] {
-        didSet {
-            print("\(products.count) items recieved")
-        }
-    }
-    fileprivate var productsInCart = [Product]() {
-        didSet {
-            if productsInCart.count > 0 {
-                activateCartButton()
-            } else {
-                cartBarItem.isEnabled = false
-            }
-        }
-    }
-    private let CellId = "productTVCell"
+    
+    var products: [Product] = [] //{ didSet { print("\(products.count) items recieved") } }
+    private let cart = ShoppingCart.shared
     private let queryService = QueryService()
+    private let cellReuseID = "CatalogProductTVCell"
+    
+    private struct Strings {
+        static let addAction = "Add to cart"
+        static let alertTitle = "Product has been added"
+        static let alertDescription = "Product in your shopping cart. Now you can proceed to checkout"
+        static let alertAction = "OK"
+    }
     
     // UIWidgets
     @IBOutlet weak var cartBarItem: UIBarButtonItem! {
@@ -48,13 +41,13 @@ class CatalogViewController: UIViewController {
         refreshControl.addTarget(self,
                                  action: #selector(handleRefresh(_:)),
                                  for: UIControlEvents.valueChanged) // ???
-        refreshControl.tintColor = #colorLiteral(red: 1, green: 0.6632423401, blue: 0, alpha: 1)
+        refreshControl.tintColor = UIColor.main
         return refreshControl
     }()
     
     private func activateCartButton() {
         cartBarItem.isEnabled = true
-        cartBarItem.customView!.transform = CGAffineTransform(scaleX: 0, y: 0)
+        cartBarItem.customView?.transform = CGAffineTransform(scaleX: 0, y: 0)
         UIView.animate(withDuration: 0.8,
                        delay: 0,
                        usingSpringWithDamping: 0.7,
@@ -66,7 +59,7 @@ class CatalogViewController: UIViewController {
     }
     
     @IBAction func resignUser(_ sender: UIBarButtonItem) {
-        AccountManager.shared.resign()
+        Auth.shared.resign()
         dismiss(animated: true)
     }
     
@@ -75,14 +68,11 @@ class CatalogViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.addSubview(refreshControl)
-        tableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: "productTVCell")
-        // test
-//        products = [Product(id: 35, title: "Very VeryVery VeryVeryVery VeryVery", description: "description VeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVery", imageUrl: "img", price: 3373555)]
+        tableView.register(UINib(nibName: ProductTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: cellReuseID)
         updateTableResults()
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        print("updating >>>")
         updateTableResults()
     }
     
@@ -102,7 +92,7 @@ extension CatalogViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellId) as! ProductTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseID) as! ProductTableViewCell
         cell.product = products[indexPath.row]
         return cell
     }
@@ -115,19 +105,28 @@ extension CatalogViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let addAction = UIContextualAction(style: .normal, title: "Add to cart") { [weak self] (_, _, _) in
-            guard let strongSelf = self else {
-                print("Error! Item cannot be added")
-                return
-            }
+        let addAction = UIContextualAction(style: .normal, title: Strings.addAction) { [weak self] (_, _, _) in
+            guard let strongSelf = self else { return }
             let product = strongSelf.products[indexPath.row]
-            strongSelf.productsInCart.append(product)
-            
+            strongSelf.cart.add(newProduct: product)
+            strongSelf.confirmationAlert()
         }
-        addAction.backgroundColor = #colorLiteral(red: 1, green: 0.6632423401, blue: 0, alpha: 1)
+        addAction.backgroundColor = UIColor.main
         let swipeActions = UISwipeActionsConfiguration(actions: [addAction])
         swipeActions.performsFirstActionWithFullSwipe = false
         return swipeActions
+    }
+    
+    private func confirmationAlert() {
+        let alert = UIAlertController(
+            title: Strings.alertTitle,
+            message: Strings.alertDescription,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: Strings.alertAction, style: .default) { _ in
+            self.activateCartButton()
+        })
+        present(alert, animated: true)
     }
 }
 

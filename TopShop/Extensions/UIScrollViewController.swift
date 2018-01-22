@@ -12,6 +12,7 @@ class UIScrollViewController: UIViewController {
     
     var scrollView: UIScrollView?
     private var keyboardIsHidden = true
+    private let spaceAboveKeyboard: CGFloat = 10
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,13 +35,12 @@ class UIScrollViewController: UIViewController {
     func adjustInsetForKeyboardShow(_ show: Bool, notification: Notification) {
         let userInfo = notification.userInfo ?? [:]
         let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let adjustmentHeight = (keyboardFrame.height + 10) * (show ? 1 : -1)
+        let adjustmentHeight = (keyboardFrame.height + spaceAboveKeyboard) * (show ? 1 : -1)
         scrollView?.contentInset.bottom += adjustmentHeight
         scrollView?.scrollIndicatorInsets.bottom += adjustmentHeight
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
-        print("show")
         if keyboardIsHidden {
             adjustInsetForKeyboardShow(true, notification: notification)
             keyboardIsHidden = false
@@ -48,7 +48,6 @@ class UIScrollViewController: UIViewController {
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        print("hide")
         adjustInsetForKeyboardShow(false, notification: notification)
         keyboardIsHidden = true
     }
