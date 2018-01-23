@@ -10,9 +10,13 @@ import UIKit
 
 class CartCollectionViewCell: UICollectionViewCell {
     
-    var cartItem: CartItem?
+    var cartItem: CartItem? { didSet { presentData() } }
     
-    private let padding: CGFloat = 8
+    private struct Constraints {
+        static let imageWidth: CGFloat = 50
+        static let priceWidth: CGFloat = 70
+        static let padding: CGFloat = 8
+    }
     
     let imageView: UIImageView = {
         let iv = UIImageView()
@@ -26,7 +30,8 @@ class CartCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .red
         label.text = "Title Title"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.numberOfLines = 2
         return label
     }()
     
@@ -34,8 +39,8 @@ class CartCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Price"
-        
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.backgroundColor = .green
         return label
     }()
@@ -71,8 +76,15 @@ class CartCollectionViewCell: UICollectionViewCell {
     
     func presentData() {
         titleLabel.text = cartItem?.product.title
-        priceLabel.text = "\(cartItem?.product.price ?? 0)p."
-        quantityLabel.text = String(describing: cartItem?.quantity)
+        if let price = cartItem?.product.price {
+            priceLabel.text = "\(price)p."
+        }
+        if let quantity = cartItem?.quantity, quantity > 1 {
+            quantityLabel.text = "\(quantity) items"
+            quantityLabel.isHidden = false
+        } else {
+            quantityLabel.isHidden = true
+        }
     }
     
     func setupViews() {
@@ -83,19 +95,19 @@ class CartCollectionViewCell: UICollectionViewCell {
         stack.addArrangedSubview(priceLabel)
         stack.addArrangedSubview(quantityLabel)
 
-        imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding).isActive = true
-        imageView.topAnchor.constraint(equalTo: topAnchor, constant: padding).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constraints.padding).isActive = true
+        imageView.topAnchor.constraint(equalTo: topAnchor, constant: Constraints.padding).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constraints.padding).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: Constraints.imageWidth).isActive = true
         
-        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: padding).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: padding).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: stack.leadingAnchor, constant: -padding).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: Constraints.padding).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constraints.padding).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: Constraints.padding).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: stack.leadingAnchor, constant: -Constraints.padding).isActive = true
         
-        stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding).isActive = true
-        stack.topAnchor.constraint(equalTo: topAnchor, constant: padding).isActive = true
-        stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding).isActive = true
-        stack.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constraints.padding).isActive = true
+        stack.topAnchor.constraint(equalTo: topAnchor, constant: Constraints.padding).isActive = true
+        stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constraints.padding).isActive = true
+        stack.widthAnchor.constraint(equalToConstant: Constraints.priceWidth).isActive = true
     }
 }

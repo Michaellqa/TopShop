@@ -30,6 +30,7 @@ class CatalogViewController: UIViewController {
             let iconButton = UIButton(frame: iconSize)
             iconButton.tintColor = .white
             iconButton.setBackgroundImage(icon, for: .normal)
+            iconButton.addTarget(self, action: #selector(showCart), for: .touchUpInside)
             cartBarItem.customView = iconButton
             cartBarItem.isEnabled = false
         }
@@ -44,6 +45,14 @@ class CatalogViewController: UIViewController {
         refreshControl.tintColor = UIColor.main
         return refreshControl
     }()
+    
+    @objc private func showCart() {
+        guard !cart.isEmpty else {
+            fatalError("Mismatch UI and model")
+        }
+        let cartController = CartViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        present(cartController, animated: true, completion: nil)
+    }
     
     private func activateCartButton() {
         cartBarItem.isEnabled = true

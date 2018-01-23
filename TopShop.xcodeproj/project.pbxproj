@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8136B9CA2014D13A003894DB /* ShoppingCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8136B9C92014D13A003894DB /* ShoppingCart.swift */; };
 		8136B9CE20162DC5003894DB /* CartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8136B9CD20162DC5003894DB /* CartCollectionViewCell.swift */; };
+		8136B9D020170FBF003894DB /* CartCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8136B9CF20170FBF003894DB /* CartCollectionViewHeader.swift */; };
 		813D0D62201484F500A10AE1 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813D0D61201484F500A10AE1 /* extensions.swift */; };
 		813D0D64201490F600A10AE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 813D0D63201490F600A10AE1 /* Assets.xcassets */; };
 		814010891FE6A11E007695E8 /* UIScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814010881FE6A11E007695E8 /* UIScrollViewController.swift */; };
@@ -34,6 +35,7 @@
 		786B67075E62253E0123DB8E /* Pods-TopShop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TopShop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TopShop/Pods-TopShop.debug.xcconfig"; sourceTree = "<group>"; };
 		8136B9C92014D13A003894DB /* ShoppingCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCart.swift; sourceTree = "<group>"; };
 		8136B9CD20162DC5003894DB /* CartCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCollectionViewCell.swift; sourceTree = "<group>"; };
+		8136B9CF20170FBF003894DB /* CartCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCollectionViewHeader.swift; sourceTree = "<group>"; };
 		813D0D61201484F500A10AE1 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		813D0D63201490F600A10AE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		814010881FE6A11E007695E8 /* UIScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				8149CFAF201086F2005DF6C9 /* ProductTableViewCell.xib */,
 				8149CFAE201086F2005DF6C9 /* ProductTableViewCell.swift */,
 				8136B9CD20162DC5003894DB /* CartCollectionViewCell.swift */,
+				8136B9CF20170FBF003894DB /* CartCollectionViewHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				819758D41FD99C5E00D802F2 /* topShop.xcdatamodeld in Sources */,
 				8149CFB0201086F2005DF6C9 /* ProductTableViewCell.swift in Sources */,
 				8162F4CC200F8E6A006E3387 /* Product.swift in Sources */,
+				8136B9D020170FBF003894DB /* CartCollectionViewHeader.swift in Sources */,
 				8136B9CE20162DC5003894DB /* CartCollectionViewCell.swift in Sources */,
 				814010891FE6A11E007695E8 /* UIScrollViewController.swift in Sources */,
 				81760A0F1FDEC72700A3BF66 /* CartViewController.swift in Sources */,
