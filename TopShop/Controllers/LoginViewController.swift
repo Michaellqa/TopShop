@@ -105,7 +105,7 @@ class LoginViewController: UIScrollViewController {
     }
     
     func quickIn() {
-        emailTextField.text = "g@v.no"
+        emailTextField.text = "t@s.t"
         passwordTextField.text = "Qwert1"
     }
     
