@@ -38,3 +38,13 @@ extension UITextField {
         }
     }
 }
+
+extension UIView {
+    static var separatorView: UIView {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        return view
+    }
+}

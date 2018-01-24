@@ -30,7 +30,7 @@ class CartCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .red
         label.text = "Title Title"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.preferredFont(forTextStyle: .body)
         label.numberOfLines = 2
         return label
     }()
@@ -40,8 +40,9 @@ class CartCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Price"
         label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.backgroundColor = .green
+        label.textAlignment = .center
         return label
     }()
     
@@ -49,15 +50,17 @@ class CartCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .gray
+        label.font = UIFont.preferredFont(forTextStyle: .caption2)
         label.text = "quintity"
+        label.textAlignment = .center
         return label
     }()
     
     let stack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.spacing = 8
-        stack.distribution = .fillEqually
+//        stack.spacing = 8
+        stack.distribution = .fillProportionally
         stack.alignment = .fill
         stack.axis = .vertical
         return stack
@@ -65,7 +68,7 @@ class CartCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .yellow
+//        backgroundColor = .yellow
         setupViews()
         presentData()
     }
@@ -88,9 +91,15 @@ class CartCollectionViewCell: UICollectionViewCell {
     }
     
     func setupViews() {
+        let separator = UIView.separatorView
+        addSubview(separator)
         addSubview(imageView)
         addSubview(titleLabel)
         addSubview(stack)
+        
+        separator.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constraints.padding).isActive = true
+        separator.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constraints.padding).isActive = true
+        separator.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
         stack.addArrangedSubview(priceLabel)
         stack.addArrangedSubview(quantityLabel)
@@ -100,10 +109,10 @@ class CartCollectionViewCell: UICollectionViewCell {
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constraints.padding).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: Constraints.imageWidth).isActive = true
         
-        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: Constraints.padding).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constraints.padding).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: Constraints.padding).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: stack.leadingAnchor, constant: -Constraints.padding).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: Constraints.padding).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constraints.padding).isActive = true
         
         stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constraints.padding).isActive = true
         stack.topAnchor.constraint(equalTo: topAnchor, constant: Constraints.padding).isActive = true

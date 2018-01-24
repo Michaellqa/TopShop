@@ -16,11 +16,16 @@ class CartViewController: UICollectionViewController {
     private let headerReuseID = "Header"
 
     func cartTest() {
-        let iphone = Product(id: 1, title: "iPhone 7", description: "", imageUrl: "", price: 35000)
-        let samsung = Product(id: 2, title: "Samsung S8", description: "", imageUrl: "", price: 45000)
-        cart.add(newProduct: iphone)
-        cart.add(newProduct: iphone)
-        cart.add(newProduct: samsung)
+        let path = Bundle.main.path(forResource: "testCart", ofType: "json")
+        let url = URL(fileURLWithPath: path!)
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let products = try JSONDecoder().decode([Product].self, from: data)
+            for product in products {
+                cart.add(newProduct: product)
+            }
+        } catch _ { }
     }
     
     override func viewDidLoad() {
@@ -30,7 +35,7 @@ class CartViewController: UICollectionViewController {
         collectionView?.register(CartCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseID)
         collectionView?.register(CartCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseID)
         
-//        cartTest()
+        cartTest()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -44,7 +49,10 @@ class CartViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerReuseID, for: indexPath)
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerReuseID, for: indexPath) as! CartCollectionViewHeader
+        header.total = cart.total()
+        header.numberOfProducts = cart.numberOfProducts
+        header.buyDelegate = self
         return header
     }
     
@@ -52,11 +60,28 @@ class CartViewController: UICollectionViewController {
 
 extension CartViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.bounds.width, height: 80)
+        return CGSize(width: view.bounds.width, height: 64)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.bounds.width, height: 100)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
+
+extension CartViewController: BuyDelegate {
+    func buy() {
+        let alert = UIAlertController(
+            title: "Do you want to buy these products?",
+            message: "Money will be debited from your card",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+        present(alert, animated: true)
     }
 }
 

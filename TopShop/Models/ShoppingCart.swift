@@ -41,4 +41,10 @@ class ShoppingCart {
         items.forEach { sum += ($0.product.price ?? 0) * $0.quantity }
         return sum
     }
+    
+    var numberOfProducts: Int {
+        var counter = 0
+        items.forEach { counter += $0.quantity }
+        return counter
+    }
 }
