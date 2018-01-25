@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -31,7 +32,7 @@
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ghw-xE-a97">
-                                                <rect key="frame" x="20" y="184" width="335" height="158"/>
+                                                <rect key="frame" x="20" y="184" width="335" height="70"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GVF-A0-Gn4">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
@@ -71,8 +72,14 @@
                                                             </button>
                                                         </subviews>
                                                     </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NwT-gc-Z18">
+                                                <rect key="frame" x="103" y="264" width="169" height="80"/>
+                                                <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmT-i7-WJh">
-                                                        <rect key="frame" x="0.0" y="78" width="335" height="36"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="169" height="36"/>
                                                         <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <state key="normal" title="Log In">
@@ -83,7 +90,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ett-hg-YT1">
-                                                        <rect key="frame" x="0.0" y="122" width="335" height="36"/>
+                                                        <rect key="frame" x="0.0" y="44" width="169" height="36"/>
                                                         <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <state key="normal" title="Sign Up">
@@ -94,10 +101,9 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </stackView>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9I-5k-dbr">
-                                                <rect key="frame" x="20" y="350" width="335" height="14.5"/>
+                                                <rect key="frame" x="20" y="352" width="335" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -109,13 +115,16 @@
                                             <constraint firstAttribute="trailing" secondItem="ghw-xE-a97" secondAttribute="trailing" constant="20" symbolic="YES" id="2vf-qj-AWp"/>
                                             <constraint firstItem="SBn-Zy-0zd" firstAttribute="top" secondItem="qxW-qQ-tWX" secondAttribute="top" constant="20" id="80o-Ug-aBy"/>
                                             <constraint firstItem="ghw-xE-a97" firstAttribute="leading" secondItem="qxW-qQ-tWX" secondAttribute="leading" constant="20" symbolic="YES" id="959-YS-xnB"/>
-                                            <constraint firstItem="y9I-5k-dbr" firstAttribute="top" secondItem="ghw-xE-a97" secondAttribute="bottom" constant="8" symbolic="YES" id="Oyz-H2-elf"/>
+                                            <constraint firstItem="NwT-gc-Z18" firstAttribute="top" secondItem="ghw-xE-a97" secondAttribute="bottom" constant="10" id="Oza-TU-YGv"/>
                                             <constraint firstItem="y9I-5k-dbr" firstAttribute="leading" secondItem="qxW-qQ-tWX" secondAttribute="leading" constant="20" symbolic="YES" id="SKa-7T-0KS"/>
                                             <constraint firstAttribute="trailing" secondItem="y9I-5k-dbr" secondAttribute="trailing" constant="20" symbolic="YES" id="Wiv-BM-HAw"/>
                                             <constraint firstItem="SBn-Zy-0zd" firstAttribute="leading" secondItem="qxW-qQ-tWX" secondAttribute="leading" constant="20" symbolic="YES" id="XfT-BU-Bi0"/>
                                             <constraint firstAttribute="height" constant="380" id="aca-Bd-w6Q"/>
                                             <constraint firstAttribute="trailing" secondItem="SBn-Zy-0zd" secondAttribute="trailing" constant="20" symbolic="YES" id="d23-Em-fHU"/>
                                             <constraint firstItem="ghw-xE-a97" firstAttribute="top" secondItem="SBn-Zy-0zd" secondAttribute="bottom" constant="20" id="jRD-7W-s7w"/>
+                                            <constraint firstItem="NwT-gc-Z18" firstAttribute="width" secondItem="qxW-qQ-tWX" secondAttribute="width" multiplier="0.45" id="lVA-Vx-zzd"/>
+                                            <constraint firstItem="NwT-gc-Z18" firstAttribute="centerX" secondItem="qxW-qQ-tWX" secondAttribute="centerX" id="ohS-Qz-Gad"/>
+                                            <constraint firstItem="y9I-5k-dbr" firstAttribute="top" secondItem="NwT-gc-Z18" secondAttribute="bottom" constant="8" symbolic="YES" id="zbI-xR-1cJ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -187,18 +196,32 @@
                                     <outlet property="delegate" destination="2WI-9m-ILN" id="qV1-mR-oFJ"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aUA-uH-FmR">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="lLH-VN-iPc">
+                                <rect key="frame" x="177" y="355" width="20" height="20"/>
+                                <color key="color" red="1" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="aUA-uH-FmR" secondAttribute="bottom" id="1Kt-mD-ZwL"/>
                             <constraint firstItem="2j0-CK-CtM" firstAttribute="leading" secondItem="1QN-kh-5Mv" secondAttribute="leading" id="29H-B8-CUQ"/>
+                            <constraint firstItem="lLH-VN-iPc" firstAttribute="centerY" secondItem="2j0-CK-CtM" secondAttribute="centerY" id="67S-rg-zCM"/>
+                            <constraint firstItem="aUA-uH-FmR" firstAttribute="top" secondItem="8Ma-Ek-CUV" secondAttribute="top" id="AHy-9w-bjH"/>
+                            <constraint firstItem="lLH-VN-iPc" firstAttribute="centerX" secondItem="2j0-CK-CtM" secondAttribute="centerX" id="GM2-Fm-Dez"/>
+                            <constraint firstItem="aUA-uH-FmR" firstAttribute="leading" secondItem="8Ma-Ek-CUV" secondAttribute="leading" id="SOV-wL-FI9"/>
                             <constraint firstItem="2j0-CK-CtM" firstAttribute="trailing" secondItem="1QN-kh-5Mv" secondAttribute="trailing" id="VJL-My-gMo"/>
+                            <constraint firstAttribute="trailing" secondItem="aUA-uH-FmR" secondAttribute="trailing" id="YdZ-yu-San"/>
                             <constraint firstAttribute="bottom" secondItem="2j0-CK-CtM" secondAttribute="bottom" id="iSf-WS-16a"/>
                             <constraint firstItem="2j0-CK-CtM" firstAttribute="top" secondItem="1QN-kh-5Mv" secondAttribute="top" id="nHT-uP-xq6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1QN-kh-5Mv"/>
                     </view>
                     <navigationItem key="navigationItem" title="Top Shop" id="dEq-xD-ufD">
-                        <barButtonItem key="leftBarButtonItem" title="Resign" id="8Wr-Nu-y4U">
+                        <barButtonItem key="leftBarButtonItem" title="Sign out" id="8Wr-Nu-y4U">
                             <connections>
                                 <action selector="resignUser:" destination="2WI-9m-ILN" id="qcY-So-kzs"/>
                             </connections>
@@ -207,6 +230,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cartBarItem" destination="Eq8-Bj-4kH" id="gsm-Y3-gpQ"/>
+                        <outlet property="loadingBackgrooundView" destination="aUA-uH-FmR" id="gVG-5o-dX2"/>
+                        <outlet property="loadingIndicator" destination="lLH-VN-iPc" id="Xfb-9b-riM"/>
                         <outlet property="profileBarItem" destination="8Wr-Nu-y4U" id="6iq-lW-4h3"/>
                         <outlet property="tableView" destination="2j0-CK-CtM" id="qTP-aC-1i5"/>
                     </connections>
@@ -259,7 +284,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCO-ft-eMM">
-                                                <rect key="frame" x="20" y="160" width="335" height="36"/>
+                                                <rect key="frame" x="103" y="160" width="169" height="36"/>
                                                 <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <state key="normal" title="Continue">
@@ -274,14 +299,13 @@
                                         <constraints>
                                             <constraint firstItem="XRm-6w-czB" firstAttribute="leading" secondItem="2YC-gW-pqS" secondAttribute="leading" constant="20" symbolic="YES" id="Fvq-5K-qw1"/>
                                             <constraint firstItem="Vz6-30-1Yo" firstAttribute="top" secondItem="XRm-6w-czB" secondAttribute="bottom" constant="8" symbolic="YES" id="HqM-FE-utk"/>
-                                            <constraint firstAttribute="trailing" secondItem="TCO-ft-eMM" secondAttribute="trailing" constant="20" symbolic="YES" id="LyV-zm-gbk"/>
                                             <constraint firstAttribute="trailing" secondItem="Vz6-30-1Yo" secondAttribute="trailing" constant="20" symbolic="YES" id="WM8-Jc-fGR"/>
                                             <constraint firstItem="Vz6-30-1Yo" firstAttribute="leading" secondItem="2YC-gW-pqS" secondAttribute="leading" constant="20" symbolic="YES" id="dAK-x0-I1b"/>
                                             <constraint firstAttribute="height" constant="500" id="f77-Kn-zoU"/>
                                             <constraint firstAttribute="trailing" secondItem="XRm-6w-czB" secondAttribute="trailing" constant="20" symbolic="YES" id="ffr-jo-DGQ"/>
-                                            <constraint firstItem="TCO-ft-eMM" firstAttribute="leading" secondItem="2YC-gW-pqS" secondAttribute="leading" constant="20" symbolic="YES" id="jxh-cH-1of"/>
                                             <constraint firstItem="TCO-ft-eMM" firstAttribute="top" secondItem="Vz6-30-1Yo" secondAttribute="bottom" constant="8" symbolic="YES" id="nPp-l5-uBm"/>
                                             <constraint firstItem="XRm-6w-czB" firstAttribute="top" secondItem="2YC-gW-pqS" secondAttribute="top" constant="20" symbolic="YES" id="oer-0l-ouz"/>
+                                            <constraint firstItem="TCO-ft-eMM" firstAttribute="centerX" secondItem="2YC-gW-pqS" secondAttribute="centerX" id="wPv-CA-5LJ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -289,6 +313,7 @@
                                     <constraint firstItem="2YC-gW-pqS" firstAttribute="top" secondItem="O5r-Gx-iy7" secondAttribute="top" id="2hb-03-C7h"/>
                                     <constraint firstItem="2YC-gW-pqS" firstAttribute="leading" secondItem="O5r-Gx-iy7" secondAttribute="leading" id="Gdo-KD-1lq"/>
                                     <constraint firstAttribute="bottom" secondItem="2YC-gW-pqS" secondAttribute="bottom" id="PYW-pd-APc"/>
+                                    <constraint firstItem="TCO-ft-eMM" firstAttribute="width" secondItem="O5r-Gx-iy7" secondAttribute="width" multiplier="0.45" id="WmN-Gg-pm2"/>
                                     <constraint firstAttribute="trailing" secondItem="2YC-gW-pqS" secondAttribute="trailing" id="hNp-iz-bDA"/>
                                     <constraint firstItem="2YC-gW-pqS" firstAttribute="width" secondItem="O5r-Gx-iy7" secondAttribute="width" id="v3m-k1-9DH"/>
                                 </constraints>

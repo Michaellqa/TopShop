@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CartCollectionViewCell: UICollectionViewCell {
     
@@ -21,14 +22,14 @@ class CartCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.backgroundColor = .blue
+//        iv.backgroundColor = .blue
         return iv
     }()
     
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .red
+//        label.backgroundColor = .red
         label.text = "Title Title"
         label.font = UIFont.preferredFont(forTextStyle: .body)
         label.numberOfLines = 2
@@ -41,7 +42,7 @@ class CartCollectionViewCell: UICollectionViewCell {
         label.text = "Price"
         label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.backgroundColor = .green
+//        label.backgroundColor = .green
         label.textAlignment = .center
         return label
     }()
@@ -49,7 +50,7 @@ class CartCollectionViewCell: UICollectionViewCell {
     let quantityLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .gray
+//        label.backgroundColor = .gray
         label.font = UIFont.preferredFont(forTextStyle: .caption2)
         label.text = "quintity"
         label.textAlignment = .center
@@ -68,7 +69,6 @@ class CartCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        backgroundColor = .yellow
         setupViews()
         presentData()
     }
@@ -88,6 +88,12 @@ class CartCollectionViewCell: UICollectionViewCell {
         } else {
             quantityLabel.isHidden = true
         }
+        if let urlString = cartItem?.product.url, let imageUrl = URL(string: urlString) {
+            imageView.kf.setImage(with: imageUrl, placeholder: UIImage(named: "no-image-avaliable"))
+        } else {
+            imageView.image = UIImage(named: "no-image-available")
+        }
+        
     }
     
     func setupViews() {

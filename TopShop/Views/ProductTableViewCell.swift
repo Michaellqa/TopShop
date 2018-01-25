@@ -30,6 +30,8 @@ class ProductTableViewCell: UITableViewCell {
             if let urlString = product.url,
                 let imageUrl = URL(string: urlString) {
                 thumbnailImageView.kf.setImage(with: imageUrl, placeholder: UIImage(named: "no-image-available"))
+            } else {
+                thumbnailImageView.image = UIImage(named: "no-image-available")
             }
         }
     }

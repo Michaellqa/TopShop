@@ -35,13 +35,15 @@ class CatalogViewController: UIViewController {
             cartBarItem.isEnabled = false
         }
     }
+    @IBOutlet weak var loadingBackgrooundView: UIView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var profileBarItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self,
                                  action: #selector(handleRefresh(_:)),
-                                 for: UIControlEvents.valueChanged) // ???
+                                 for: UIControlEvents.valueChanged) 
         refreshControl.tintColor = UIColor.main
         return refreshControl
     }()
@@ -51,7 +53,7 @@ class CatalogViewController: UIViewController {
             fatalError("Mismatch UI and model")
         }
         let cartController = CartViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        present(cartController, animated: true, completion: nil)
+        navigationController?.pushViewController(cartController, animated: true)
     }
     
     private func activateCartButton() {
@@ -78,18 +80,24 @@ class CatalogViewController: UIViewController {
         tableView.dataSource = self
         tableView.addSubview(refreshControl)
         tableView.register(UINib(nibName: ProductTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: cellReuseID)
-        updateTableResults()
+        
+        loadingIndicator.startAnimating()
+        updateTableResults {
+            self.loadingBackgrooundView.isHidden = true
+            self.loadingIndicator.stopAnimating()
+        }
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        updateTableResults()
+        updateTableResults(completion: nil)
     }
     
-    func updateTableResults() {
+    func updateTableResults(completion: (() -> ())? ) {
         queryService.alamoAutoFetch { products in
             self.refreshControl.endRefreshing()
             self.products = products
             self.tableView.reloadData()
+            completion?()
         }
     }
 }

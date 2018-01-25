@@ -22,7 +22,7 @@ class CartCollectionViewHeader: UICollectionViewCell {
     
     let totalLabel: UILabel = {
         let label = UILabel()
-//        label.backgroundColor = .yellow
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -32,8 +32,7 @@ class CartCollectionViewHeader: UICollectionViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Proceed to checkout", for: .normal)
         button.addTarget(self, action: #selector(handleCheckout), for: .touchUpInside)
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.black.cgColor
+        button.contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 8)
         return button
     }()
     
@@ -42,7 +41,7 @@ class CartCollectionViewHeader: UICollectionViewCell {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.spacing = 8
         stack.distribution = .fillProportionally
-        stack.alignment = .fill
+        stack.alignment = .center
         stack.axis = .vertical
         return stack
     }()
@@ -66,6 +65,8 @@ class CartCollectionViewHeader: UICollectionViewCell {
         stackView.topAnchor.constraint(equalTo: topAnchor, constant: padding).isActive = true
         stackView.bottomAnchor.constraint(equalTo: separator.topAnchor, constant: -padding).isActive = true
         
+        totalLabel.widthAnchor.constraint(greaterThanOrEqualTo: widthAnchor, multiplier: 1, constant: -8) .isActive = true
+        buyButton.widthAnchor.constraint(greaterThanOrEqualTo: widthAnchor, multiplier: 0.45).isActive = true
         buyButton.layer.cornerRadius = 5
     }
     
@@ -80,4 +81,5 @@ class CartCollectionViewHeader: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }

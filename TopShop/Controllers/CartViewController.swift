@@ -25,17 +25,23 @@ class CartViewController: UICollectionViewController {
             for product in products {
                 cart.add(newProduct: product)
             }
+            cart.add(newProduct: products[0])
         } catch _ { }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 11.0, *) {
+            collectionView?.contentInsetAdjustmentBehavior = .always
+        }
+        
         title = navigationTitle
         collectionView?.backgroundColor = .white
         collectionView?.register(CartCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseID)
         collectionView?.register(CartCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseID)
         
-        cartTest()
+//        cartTest()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -70,6 +76,7 @@ extension CartViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    
 }
 
 extension CartViewController: BuyDelegate {
@@ -79,8 +86,8 @@ extension CartViewController: BuyDelegate {
             message: "Money will be debited from your card",
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
 }
