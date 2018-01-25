@@ -10,12 +10,13 @@ import UIKit
 
 class CartViewController: UICollectionViewController {
     
+    // MARK: - Properties
     private let cart = ShoppingCart.shared
     private let navigationTitle = "Cart"
     private let cellReuseID = "CartCell"
     private let headerReuseID = "Header"
 
-    func cartTest() {
+    private func cartTest() {
         let path = Bundle.main.path(forResource: "testCart", ofType: "json")
         let url = URL(fileURLWithPath: path!)
         
@@ -29,6 +30,7 @@ class CartViewController: UICollectionViewController {
         } catch _ { }
     }
     
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +45,10 @@ class CartViewController: UICollectionViewController {
         
 //        cartTest()
     }
-    
+}
+
+// MARK: - DataSource
+extension CartViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cart.items.count
     }
@@ -61,9 +66,9 @@ class CartViewController: UICollectionViewController {
         header.buyDelegate = self
         return header
     }
-    
 }
 
+// MARK: - Delegate
 extension CartViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.bounds.width, height: 64)
@@ -79,6 +84,7 @@ extension CartViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
+// MARK: - BuyDelegate
 extension CartViewController: BuyDelegate {
     func buy() {
         let alert = UIAlertController(

@@ -19,27 +19,16 @@ enum SignUpError {
     case weakPassword
 }
 
-class AUser {
-    let name: String
-    let email: String
-    let password: String
-    
-    init(name: String, email: String, password: String) {
-        self.name = name
-        self.email = email
-        self.password = password
-    }
-}
-
 class Auth {
-    private let defaults = UserDefaults.standard
-    var loggedUser: AUser?
+    
+    // MARK: - PublicAPI
+    private(set) var loggedUser: User?
     
     func isUserLoggedIn() -> Bool {
         return loggedUser != nil
     }
     
-    func newUser(_ user: AUser) -> SignUpError? {
+    func newUser(_ user: User) -> SignUpError? {
         guard emailIsCorrect(user.email) else { return .incorrectEmail }
         guard defaults.string(forKey: user.email) == nil else { return .loginIsTaken }
         guard isPasswordValid(user.password) else { return .weakPassword }
@@ -59,9 +48,12 @@ class Auth {
         guard passMD5 == md5(forPassword: pass) else { return .wrongPassword }
         
         print("Signed In")
-        loggedUser = AUser(name: "stub", email: email, password: pass)
+        loggedUser = User(name: "stub", email: email, password: pass)
         return nil
     }
+    
+    // MARK: - Properties
+    private let defaults = UserDefaults.standard
     
     private func md5(forPassword pass: String) -> String {
         // TODO: Encrypting
@@ -86,6 +78,7 @@ class Auth {
         return passwordTest.evaluate(with: pass)
     }
     
+    // MARK: - Singleton
     private init() { }
     
     static private var auth: Auth?
@@ -95,5 +88,7 @@ class Auth {
         }
         return auth!
     }
+    
+    
     
 }

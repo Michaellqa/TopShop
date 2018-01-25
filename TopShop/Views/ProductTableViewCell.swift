@@ -11,16 +11,12 @@ import Kingfisher
 
 class ProductTableViewCell: UITableViewCell {
     
+    // MARK: - Properties
     static let nibName = "ProductTableViewCell"
 
-    @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
-    
     var product: Product? { didSet { commonInit() } }
     
-    func commonInit() {
+    private func commonInit() {
         selectionStyle = .none
         if let product = product {
             titleLabel?.text = product.title
@@ -36,7 +32,13 @@ class ProductTableViewCell: UITableViewCell {
         }
     }
     
+    // MARK: - Outlets
+    @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
     
+    // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         commonInit()

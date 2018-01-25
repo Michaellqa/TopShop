@@ -10,11 +10,7 @@ import UIKit
 
 class CatalogViewController: UIViewController {
     
-    var products: [Product] = [] //{ didSet { print("\(products.count) items recieved") } }
-    private let cart = ShoppingCart.shared
-    private let queryService = QueryService()
-    private let cellReuseID = "CatalogProductTVCell"
-    
+    // MARK: - Properties
     private struct Strings {
         static let addAction = "Add to cart"
         static let alertTitle = "Product has been added"
@@ -22,7 +18,39 @@ class CatalogViewController: UIViewController {
         static let alertAction = "OK"
     }
     
-    // UIWidgets
+    var products: [Product] = []
+    private let cart = ShoppingCart.shared
+    private let queryService = QueryService()
+    private let cellReuseID = "CatalogProductTVCell"
+    
+    func updateTableResults(completion: (() -> ())? ) {
+        queryService.alamoAutoFetch { products in
+            self.refreshControl.endRefreshing()
+            self.products = products
+            self.tableView.reloadData()
+            completion?()
+        }
+    }
+    
+    private func activateCartButton() {
+        cartBarItem.isEnabled = true
+        cartBarItem.customView?.transform = CGAffineTransform(scaleX: 0, y: 0)
+        UIView.animate(withDuration: 0.8,
+                       delay: 0,
+                       usingSpringWithDamping: 0.7,
+                       initialSpringVelocity: 10,
+                       options: .curveLinear,
+                       animations: {
+                        self.cartBarItem.customView!.transform = CGAffineTransform.identity
+        })
+    }
+    
+    @objc func handleRefresh() {
+        updateTableResults(completion: nil)
+    }
+    
+    
+    // MARK: - IBOutlets
     @IBOutlet weak var cartBarItem: UIBarButtonItem! {
         didSet {
             let icon = UIImage(named: "cart-v3")?.withRenderingMode(.alwaysTemplate)
@@ -42,38 +70,19 @@ class CatalogViewController: UIViewController {
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self,
-                                 action: #selector(handleRefresh(_:)),
-                                 for: UIControlEvents.valueChanged) 
+                                 action: #selector(handleRefresh),
+                                 for: UIControlEvents.valueChanged)
         refreshControl.tintColor = UIColor.main
         return refreshControl
     }()
     
-    @objc private func showCart() {
-        guard !cart.isEmpty else {
-            fatalError("Mismatch UI and model")
-        }
-        let cartController = CartViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        navigationController?.pushViewController(cartController, animated: true)
-    }
-    
-    private func activateCartButton() {
-        cartBarItem.isEnabled = true
-        cartBarItem.customView?.transform = CGAffineTransform(scaleX: 0, y: 0)
-        UIView.animate(withDuration: 0.8,
-                       delay: 0,
-                       usingSpringWithDamping: 0.7,
-                       initialSpringVelocity: 10,
-                       options: .curveLinear,
-                       animations: {
-                        self.cartBarItem.customView!.transform = CGAffineTransform.identity
-        })
-    }
-    
+    //MARK: - IBActions
     @IBAction func resignUser(_ sender: UIBarButtonItem) {
         Auth.shared.resign()
         dismiss(animated: true)
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -88,18 +97,27 @@ class CatalogViewController: UIViewController {
         }
     }
     
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        updateTableResults(completion: nil)
+    // MARK: - Navigation
+    @objc private func showCart() {
+        guard !cart.isEmpty else {
+            fatalError("Mismatch UI and model")
+        }
+        let cartController = CartViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(cartController, animated: true)
     }
     
-    func updateTableResults(completion: (() -> ())? ) {
-        queryService.alamoAutoFetch { products in
-            self.refreshControl.endRefreshing()
-            self.products = products
-            self.tableView.reloadData()
-            completion?()
-        }
+    private func showConfirmationAlert() {
+        let alert = UIAlertController(
+            title: Strings.alertTitle,
+            message: Strings.alertDescription,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: Strings.alertAction, style: .default) { _ in
+            self.activateCartButton()
+        })
+        present(alert, animated: true)
     }
+    
 }
 
 // Mark: - TableViewDataSource
@@ -126,7 +144,7 @@ extension CatalogViewController: UITableViewDelegate {
             guard let strongSelf = self else { return }
             let product = strongSelf.products[indexPath.row]
             strongSelf.cart.add(newProduct: product)
-            strongSelf.confirmationAlert()
+            strongSelf.showConfirmationAlert()
         }
         addAction.backgroundColor = UIColor.main
         let swipeActions = UISwipeActionsConfiguration(actions: [addAction])
@@ -134,17 +152,6 @@ extension CatalogViewController: UITableViewDelegate {
         return swipeActions
     }
     
-    private func confirmationAlert() {
-        let alert = UIAlertController(
-            title: Strings.alertTitle,
-            message: Strings.alertDescription,
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: Strings.alertAction, style: .default) { _ in
-            self.activateCartButton()
-        })
-        present(alert, animated: true)
-    }
 }
 
 

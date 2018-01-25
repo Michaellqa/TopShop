@@ -10,16 +10,13 @@ import UIKit
 
 class UIScrollViewController: UIViewController {
     
+    // MARK: - Properties
     var scrollView: UIScrollView?
+    
     private var keyboardIsHidden = true
     private let spaceAboveKeyboard: CGFloat = 10
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addKeyboardObservers()
-    }
-    
-    func addKeyboardObservers() {
+    private func addKeyboardObservers() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(UIScrollViewController.keyboardWillShow(_:)),
@@ -32,7 +29,7 @@ class UIScrollViewController: UIViewController {
             object: nil)
     }
     
-    func adjustInsetForKeyboardShow(_ show: Bool, notification: Notification) {
+    private func adjustInsetForKeyboardShow(_ show: Bool, notification: Notification) {
         let userInfo = notification.userInfo ?? [:]
         let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let adjustmentHeight = (keyboardFrame.height + spaceAboveKeyboard) * (show ? 1 : -1)
@@ -40,16 +37,22 @@ class UIScrollViewController: UIViewController {
         scrollView?.scrollIndicatorInsets.bottom += adjustmentHeight
     }
     
-    @objc func keyboardWillShow(_ notification: Notification) {
+    @objc private func keyboardWillShow(_ notification: Notification) {
         if keyboardIsHidden {
             adjustInsetForKeyboardShow(true, notification: notification)
             keyboardIsHidden = false
         }
     }
     
-    @objc func keyboardWillHide(_ notification: Notification) {
+    @objc private func keyboardWillHide(_ notification: Notification) {
         adjustInsetForKeyboardShow(false, notification: notification)
         keyboardIsHidden = true
+    }
+    
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addKeyboardObservers()
     }
     
     deinit {

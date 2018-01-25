@@ -16,14 +16,6 @@ class Product: HandyJSON, Codable {
     var url: String?
     var price: Int?
     
-//    private enum CodingKeys: String, CodingKey {
-//        case imageURL = "url"
-//        case title
-//        case description
-//        case id
-//        case price
-//    }
-    
     required init() { }
     
     init(id: Int, title: String, description: String, imageUrl: String, price: Int) {

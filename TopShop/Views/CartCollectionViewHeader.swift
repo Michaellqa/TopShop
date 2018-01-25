@@ -14,6 +14,7 @@ protocol BuyDelegate {
 
 class CartCollectionViewHeader: UICollectionViewCell {
     
+    //MARK: - Properties
     var numberOfProducts = 0 { didSet { presentData() } }
     var total = 0 { didSet { presentData() } }
     var buyDelegate: BuyDelegate?
@@ -46,12 +47,6 @@ class CartCollectionViewHeader: UICollectionViewCell {
         return stack
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-        presentData()
-    }
-    
     func setupViews() {
         let separator = UIView.separatorView
         addSubview(separator)
@@ -76,6 +71,13 @@ class CartCollectionViewHeader: UICollectionViewCell {
     
     @objc func handleCheckout() {
         buyDelegate?.buy()
+    }
+    
+    // MARK: - Init
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+        presentData()
     }
     
     required init?(coder aDecoder: NSCoder) {

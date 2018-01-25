@@ -11,13 +11,7 @@ import Foundation
 
 class QueryService {
     
-    private var products: [Product] = []
-    private let destinationURLString = "https://api.myjson.com/bins/jfqq5"
-    
-    private struct ErrorMessage {
-        static let cannotDecodeJson = "JSON cannot be decoded"
-    }
-    
+    // MARK: - PublicAPI
     func alamoHandyFetch(completion: @escaping ([Product]) -> ()) {
         Alamofire.request(destinationURLString).responseData { response in
             if let data = response.value,
@@ -95,6 +89,14 @@ class QueryService {
         dataTask.resume()
     }
     
+    // MARK: - Properties
+    private var products: [Product] = []
+    private let destinationURLString = "https://api.myjson.com/bins/jfqq5"
+    
+    private struct ErrorMessage {
+        static let cannotDecodeJson = "JSON cannot be decoded"
+    }
+    
     private func updateResults(_ data: Data) {
         products.removeAll()
         var response: [Any]
@@ -120,7 +122,7 @@ class QueryService {
         }
     }
     
-    func constructURL() -> URL? {
+    private func constructURL() -> URL? {
         let urlString = destinationURLString
         guard let url = URL(string: urlString) else {
             return nil

@@ -11,6 +11,7 @@ import Kingfisher
 
 class CartCollectionViewCell: UICollectionViewCell {
     
+    //MARK: - Properties
     var cartItem: CartItem? { didSet { presentData() } }
     
     private struct Constraints {
@@ -22,14 +23,12 @@ class CartCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-//        iv.backgroundColor = .blue
         return iv
     }()
     
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.backgroundColor = .red
         label.text = "Title Title"
         label.font = UIFont.preferredFont(forTextStyle: .body)
         label.numberOfLines = 2
@@ -42,7 +41,6 @@ class CartCollectionViewCell: UICollectionViewCell {
         label.text = "Price"
         label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.preferredFont(forTextStyle: .title3)
-//        label.backgroundColor = .green
         label.textAlignment = .center
         return label
     }()
@@ -50,7 +48,6 @@ class CartCollectionViewCell: UICollectionViewCell {
     let quantityLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.backgroundColor = .gray
         label.font = UIFont.preferredFont(forTextStyle: .caption2)
         label.text = "quintity"
         label.textAlignment = .center
@@ -60,22 +57,11 @@ class CartCollectionViewCell: UICollectionViewCell {
     let stack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
-//        stack.spacing = 8
         stack.distribution = .fillProportionally
         stack.alignment = .fill
         stack.axis = .vertical
         return stack
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-        presentData()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     func presentData() {
         titleLabel.text = cartItem?.product.title
@@ -125,4 +111,16 @@ class CartCollectionViewCell: UICollectionViewCell {
         stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constraints.padding).isActive = true
         stack.widthAnchor.constraint(equalToConstant: Constraints.priceWidth).isActive = true
     }
+    
+    // MARK: - Init
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+        presentData()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
