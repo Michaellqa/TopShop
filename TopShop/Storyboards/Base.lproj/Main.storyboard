@@ -230,7 +230,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cartBarItem" destination="Eq8-Bj-4kH" id="gsm-Y3-gpQ"/>
-                        <outlet property="loadingBackgrooundView" destination="aUA-uH-FmR" id="gVG-5o-dX2"/>
+                        <outlet property="loadingBackgroundView" destination="aUA-uH-FmR" id="gVG-5o-dX2"/>
                         <outlet property="loadingIndicator" destination="lLH-VN-iPc" id="Xfb-9b-riM"/>
                         <outlet property="profileBarItem" destination="8Wr-Nu-y4U" id="6iq-lW-4h3"/>
                         <outlet property="tableView" destination="2j0-CK-CtM" id="qTP-aC-1i5"/>

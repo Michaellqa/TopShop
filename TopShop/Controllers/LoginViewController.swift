@@ -39,9 +39,9 @@ class LoginViewController: UIScrollViewController {
         guard
             let email = emailTextField?.text, !email.isEmpty,
             let password = passwordTextField?.text, !password.isEmpty
-            else {
-                showErrorMessage(InputErrorMessage.emptyFields)
-                return
+        else {
+            showErrorMessage(InputErrorMessage.emptyFields)
+            return
         }
         if let error = authManager.logIn(withEmail: email, andPass: password) {
             switch error {
@@ -57,7 +57,7 @@ class LoginViewController: UIScrollViewController {
     private func showErrorMessage(_ message: String) {
         errorMessageLabel.text = message
         errorMessageLabel.isHidden = false
-        passwordTextField.indicateWrongInput()
+//        passwordTextField.indicateWrongInput()
     }
     
     private func clearInputFields() {

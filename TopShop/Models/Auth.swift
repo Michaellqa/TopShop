@@ -47,7 +47,6 @@ class Auth {
         guard let passMD5 = defaults.string(forKey: email) else { return .unregisteredEmail }
         guard passMD5 == md5(forPassword: pass) else { return .wrongPassword }
         
-        print("Signed In")
         loggedUser = User(name: "stub", email: email, password: pass)
         return nil
     }

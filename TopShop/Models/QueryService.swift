@@ -56,7 +56,7 @@ class QueryService {
                         product.url = productItem["url"] as? String
                         product.price = productItem["price"] as? Int
                         
-                        self.products.append(product)
+                        self.products.append(product) // ---SELF---
                     }
                 }
             }
@@ -102,7 +102,7 @@ class QueryService {
         var response: [Any]
         
         do {
-            response = try JSONSerialization.jsonObject(with: data, options: []) as! [Any] //!
+            response = try JSONSerialization.jsonObject(with: data, options: []) as! [Any] // ---!---
         } catch let parseError {
             print("JSONSerialization error \(parseError)")
             return
@@ -117,7 +117,7 @@ class QueryService {
                 product.url = productItem["url"] as? String
                 product.price = productItem["price"] as? Int
                 
-                self.products.append(product)
+                products.append(product)
             }
         }
     }

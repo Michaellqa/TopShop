@@ -14,6 +14,8 @@ protocol BuyDelegate {
 
 class CartCollectionViewHeader: UICollectionViewCell {
     
+    static let height: CGFloat = 100
+    
     //MARK: - Properties
     var numberOfProducts = 0 { didSet { presentData() } }
     var total = 0 { didSet { presentData() } }

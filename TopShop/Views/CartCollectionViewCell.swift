@@ -10,7 +10,9 @@ import UIKit
 import Kingfisher
 
 class CartCollectionViewCell: UICollectionViewCell {
-    
+   
+    static let height: CGFloat = 64
+
     //MARK: - Properties
     var cartItem: CartItem? { didSet { presentData() } }
     
@@ -29,7 +31,6 @@ class CartCollectionViewCell: UICollectionViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Title Title"
         label.font = UIFont.preferredFont(forTextStyle: .body)
         label.numberOfLines = 2
         return label
@@ -38,7 +39,6 @@ class CartCollectionViewCell: UICollectionViewCell {
     let priceLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Price"
         label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textAlignment = .center
@@ -49,7 +49,6 @@ class CartCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.preferredFont(forTextStyle: .caption2)
-        label.text = "quintity"
         label.textAlignment = .center
         return label
     }()
@@ -68,18 +67,15 @@ class CartCollectionViewCell: UICollectionViewCell {
         if let price = cartItem?.product.price {
             priceLabel.text = "\(price)p."
         }
-        if let quantity = cartItem?.quantity, quantity > 1 {
+        if let quantity = cartItem?.quantity {
             quantityLabel.text = "\(quantity) items"
-            quantityLabel.isHidden = false
-        } else {
-            quantityLabel.isHidden = true
+            quantityLabel.isHidden = (quantity > 1) ? false : true
         }
         if let urlString = cartItem?.product.url, let imageUrl = URL(string: urlString) {
             imageView.kf.setImage(with: imageUrl, placeholder: UIImage(named: "no-image-avaliable"))
         } else {
             imageView.image = UIImage(named: "no-image-available")
         }
-        
     }
     
     func setupViews() {

@@ -18,17 +18,18 @@ class ProductTableViewCell: UITableViewCell {
     
     private func commonInit() {
         selectionStyle = .none
-        if let product = product {
-            titleLabel?.text = product.title
-            descriptionLabel?.text = product.description
-            priceLabel?.text = product.price != nil ? "\(product.price!)p" : "" //!
-            
-            if let urlString = product.url,
-                let imageUrl = URL(string: urlString) {
-                thumbnailImageView.kf.setImage(with: imageUrl, placeholder: UIImage(named: "no-image-available"))
-            } else {
-                thumbnailImageView.image = UIImage(named: "no-image-available")
-            }
+        guard let product = product else {
+            return
+        }
+        titleLabel?.text = product.title
+        descriptionLabel?.text = product.description
+        priceLabel?.text = product.price != nil ? "\(product.price!)p" : ""
+        
+        if let urlString = product.url,
+            let imageUrl = URL(string: urlString) {
+            thumbnailImageView.kf.setImage(with: imageUrl, placeholder: UIImage(named: "no-image-available"))
+        } else {
+            thumbnailImageView.image = UIImage(named: "no-image-available")
         }
     }
     

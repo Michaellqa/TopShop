@@ -24,10 +24,12 @@ class CatalogViewController: UIViewController {
     private let cellReuseID = "CatalogProductTVCell"
     
     func updateTableResults(completion: (() -> ())? ) {
-        queryService.alamoAutoFetch { products in
-            self.refreshControl.endRefreshing()
-            self.products = products
-            self.tableView.reloadData()
+        queryService.alamoAutoFetch { [weak self] products in // ---SELF---
+            if let strongSelf = self {
+                strongSelf.refreshControl.endRefreshing()
+                strongSelf.products = products
+                strongSelf.tableView.reloadData()
+            }
             completion?()
         }
     }
@@ -63,7 +65,7 @@ class CatalogViewController: UIViewController {
             cartBarItem.isEnabled = false
         }
     }
-    @IBOutlet weak var loadingBackgrooundView: UIView!
+    @IBOutlet weak var loadingBackgroundView: UIView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var profileBarItem: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
@@ -92,7 +94,7 @@ class CatalogViewController: UIViewController {
         
         loadingIndicator.startAnimating()
         updateTableResults {
-            self.loadingBackgrooundView.isHidden = true
+            self.loadingBackgroundView.isHidden = true // ---SELF---
             self.loadingIndicator.stopAnimating()
         }
     }
@@ -153,12 +155,3 @@ extension CatalogViewController: UITableViewDelegate {
     }
     
 }
-
-
-
-
-
-
-
-
-

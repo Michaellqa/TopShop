@@ -16,19 +16,6 @@ class CartViewController: UICollectionViewController {
     private let cellReuseID = "CartCell"
     private let headerReuseID = "Header"
 
-    private func cartTest() {
-        let path = Bundle.main.path(forResource: "testCart", ofType: "json")
-        let url = URL(fileURLWithPath: path!)
-        
-        do {
-            let data = try Data(contentsOf: url)
-            let products = try JSONDecoder().decode([Product].self, from: data)
-            for product in products {
-                cart.add(newProduct: product)
-            }
-            cart.add(newProduct: products[0])
-        } catch _ { }
-    }
     
     // MARK: Lifecycle
     override func viewDidLoad() {
@@ -43,7 +30,7 @@ class CartViewController: UICollectionViewController {
         collectionView?.register(CartCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseID)
         collectionView?.register(CartCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerReuseID)
         
-//        cartTest()
+        cartTest()
     }
 }
 
@@ -71,11 +58,11 @@ extension CartViewController {
 // MARK: - Delegate
 extension CartViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.bounds.width, height: 64)
+        return CGSize(width: view.bounds.width, height: CartCollectionViewCell.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.bounds.width, height: 100)
+        return CGSize(width: view.bounds.width, height: CartCollectionViewHeader.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -95,6 +82,22 @@ extension CartViewController: BuyDelegate {
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         present(alert, animated: true)
+    }
+}
+// MARK: - Testing
+extension CartViewController {
+    private func cartTest() {
+        let path = Bundle.main.path(forResource: "testCart", ofType: "json")
+        let url = URL(fileURLWithPath: path!)
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let products = try JSONDecoder().decode([Product].self, from: data)
+            for product in products {
+                cart.add(newProduct: product)
+            }
+            cart.add(newProduct: products[0])
+        } catch _ { }
     }
 }
 

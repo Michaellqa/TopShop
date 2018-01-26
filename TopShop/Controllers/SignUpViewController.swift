@@ -10,6 +10,7 @@ import UIKit
 
 class SignUpViewController: UIScrollViewController {
     
+    // MARK: - Properties
     private struct InputErrorMessage {
         static let emptyFields = "Please fill in all the text fields"
         static let incorrectEmail = "This email is incorrect"
